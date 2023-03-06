@@ -104,56 +104,54 @@ $(document).ready(
                 }
             }
             )
-            $(".prev").click(
-                function () {
-                    $(".next").removeClass("greyed")
-                    next_button = $(".active").attr("id")
-                    if (next_button > 2) {
-                        next_button = "#" + next_button
-                        $(".active").prev().addClass("active")
-                        $(next_button).removeClass("active")
-                        $("main").children().remove()
-                            $.ajax({
-                                url: "https://yts.mx/api/v2/list_movies.json?sort_by=rating",
-                                success: function (res) {
-                                    next_button = (parseInt(next_button.slice(1)) * 2) - 2
-                                    two_movies = res.data.movies.slice(next_button - 2, next_button)
-                
-                                    two_movies.forEach(function (movie) {
-                                        $("main").append(
-                                            `
-                                            <div class="movie">
-                                                <img src="${movie.medium_cover_image}" alt="${movie.title}">
-                                            </div>
-                                            `
-                                        )
-                                    })
-                                }
+    $(".prev").click(
+        function () {
+            $(".next").removeClass("greyed")
+            next_button = $(".active").attr("id")
+            if (next_button > 2) {
+                next_button = "#" + next_button
+                $(".active").prev().addClass("active")
+                $(next_button).removeClass("active")
+                $("main").children().remove()
+                    $.ajax({
+                        url: "https://yts.mx/api/v2/list_movies.json?sort_by=rating",
+                        success: function (res) {
+                            next_button = (parseInt(next_button.slice(1)) * 2) - 2
+                            two_movies = res.data.movies.slice(next_button - 2, next_button)
+                            two_movies.forEach(function (movie) {
+                                $("main").append(
+                                    `
+                                    <div class="movie">
+                                        <img src="${movie.medium_cover_image}" alt="${movie.title}">
+                                    </div>
+                                    `
+                                )
                             })
                         }
-                        if (next_button == 2) {
-                            next_button = "#" + next_button
-                            $(".active").prev().addClass("active")
-                            $(next_button).removeClass("active")
-                            $(this).addClass("greyed")
-                            $("main").children().remove()
-                                $.ajax({
-                                    url: "https://yts.mx/api/v2/list_movies.json?sort_by=rating",
-                                    success: function (res) {
-                                        next_button = (parseInt(next_button.slice(1)) * 2) - 2
-                                        two_movies = res.data.movies.slice(next_button - 2, next_button)
-                    
-                                        two_movies.forEach(function (movie) {
-                                            $("main").append(
-                                                `
-                                                <div class="movie">
-                                                    <img src="${movie.medium_cover_image}" alt="${movie.title}">
-                                                </div>
-                                                `
-                                            )
-                                        })
-                                    }
-                                })
+                    })
+            }
+            if (next_button == 2) {
+                next_button = "#" + next_button
+                $(".active").prev().addClass("active")
+                $(next_button).removeClass("active")
+                $(this).addClass("greyed")
+                $("main").children().remove()
+                    $.ajax({
+                        url: "https://yts.mx/api/v2/list_movies.json?sort_by=rating",
+                        success: function (res) {
+                            next_button = (parseInt(next_button.slice(1)) * 2) - 2
+                            two_movies = res.data.movies.slice(next_button - 2, next_button)
+                            two_movies.forEach(function (movie) {
+                                $("main").append(
+                                    `
+                                    <div class="movie">
+                                        <img src="${movie.medium_cover_image}" alt="${movie.title}">
+                                    </div>
+                                    `
+                                )
+                            })
+                        }
+                    })
             }
         }
     )
