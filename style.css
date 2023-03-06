@@ -1,0 +1,14 @@
+.page-link:hover {
+    background-color: green !important;
+    color: white;
+}
+.greyed {
+    background-color: white;
+    color: grey;
+    border: 0px;
+    opacity: 0.5;
+}
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
